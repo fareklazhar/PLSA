@@ -21,8 +21,8 @@ class BasePLSA:
     def __init__(self, corpus: Corpus, n_topics: int, tf_idf: bool = False):
         self._corpus, self.__n_topics = self.__validated(corpus, n_topics)
         self._corpus = corpus
-        self.__n_topics = abs(int(n_topics))
-        self.__tf_idf = bool(tf_idf)
+        self.__n_topics = abs(n_topics)
+        self.__tf_idf = tf_idf
         self._doc_word = corpus.get_doc_word(tf_idf)
         self._joint = empty((self.__n_topics, corpus.n_docs, corpus.n_words))
         self._conditional = self.__random(corpus.n_docs, corpus.n_words)
@@ -93,9 +93,9 @@ class BasePLSA:
             Container class for the results of the latent semantic analysis.
 
         """
-        eps = abs(float(eps))
-        max_iter = abs(int(max_iter))
-        warmup = abs(int(warmup))
+        eps = abs(eps)
+        max_iter = abs(max_iter)
+        warmup = abs(warmup)
         n_iter = 0
         while n_iter < max_iter + warmup:
             self._m_step()
@@ -133,7 +133,7 @@ class BasePLSA:
             Container class for the best result.
 
         """
-        n_runs = abs(int(n_runs))
+        n_runs = abs(n_runs)
         best = self.fit(**kwargs)
         minimum_kl = best.kl_divergence
         for _ in range(n_runs):
@@ -200,7 +200,7 @@ class BasePLSA:
 
     @staticmethod
     def __validated(corpus: Corpus, n_topics: int) -> (Corpus, int):
-        n_topics = abs(int(n_topics))
+        n_topics = abs(n_topics)
         if n_topics < 2:
             raise ValueError('There must be at least 2 topics!')
         if corpus.n_docs <= n_topics or corpus.n_words <= n_topics:

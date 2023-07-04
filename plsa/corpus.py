@@ -89,7 +89,7 @@ class Corpus:
 
         """
         docs, n_docs = [], 0
-        with open(str(path), encoding=encoding, newline='') as stream:
+        with open(path, encoding=encoding, newline='') as stream:
             file = csv.reader(stream, **kwargs)
             try:
                 n_cols = len(next(file))
@@ -132,7 +132,7 @@ class Corpus:
         https://docs.python.org/3/library/codecs.html
 
         """
-        directory = directory if directory.endswith('/') else directory + '/'
+        directory = directory if directory.endswith('/') else f'{directory}/'
         filenames = os.listdir(directory)
         n_files = min(len(filenames), max_files)
         docs = []

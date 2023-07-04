@@ -46,7 +46,7 @@ def remove_non_ascii(doc: str) -> str:
         removed.
 
     """
-    return ''.join(char if ord(char) < 128 else ' ' for char in str(doc))
+    return ''.join(char if ord(char) < 128 else ' ' for char in doc)
 
 
 def to_lower(doc: str) -> str:
@@ -64,7 +64,7 @@ def to_lower(doc: str) -> str:
         converted to lowercase.
 
     """
-    return str(doc).lower()
+    return doc.lower()
 
 
 def remove_numbers(doc: str) -> str:
@@ -82,7 +82,7 @@ def remove_numbers(doc: str) -> str:
         removed.
 
     """
-    removed = filter(lambda character: not character.isdigit(), str(doc))
+    removed = filter(lambda character: not character.isdigit(), doc)
     return ''.join(removed)
 
 
@@ -102,7 +102,7 @@ def remove_tags(exclude_regex: str) -> Str2StrT:
         from a string.
 
     """
-    exclude_regex = re.compile(str(exclude_regex))
+    exclude_regex = re.compile(exclude_regex)
 
     def tag_remover(doc: str) -> str:
         """Removes matches to the given regular expression from a string.
@@ -119,7 +119,7 @@ def remove_tags(exclude_regex: str) -> Str2StrT:
             specified by `exclude_regex` removed.
 
         """
-        return re.sub(exclude_regex, ' ', str(doc))
+        return re.sub(exclude_regex, ' ', doc)
 
     return tag_remover
 
@@ -156,7 +156,7 @@ def remove_punctuation(punctuation: Iterable[str]) -> Str2StrT:
             removed.
 
         """
-        return str(doc).translate(translation)
+        return doc.translate(translation)
 
     return punctuation_remover
 
@@ -176,7 +176,7 @@ def tokenize(doc: str) -> Tuple[str, ...]:
 
 
     """
-    return tuple(str(doc).split())
+    return tuple(doc.split())
 
 
 def remove_short_words(min_word_len: int) -> StrIter2TupleT:
@@ -210,7 +210,7 @@ def remove_short_words(min_word_len: int) -> StrIter2TupleT:
             given threshold removed.
 
         """
-        removed = filter(lambda word: len(word) >= int(min_word_len), doc)
+        removed = filter(lambda word: len(word) >= min_word_len, doc)
         return tuple(removed)
 
     return short_word_remover

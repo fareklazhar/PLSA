@@ -79,7 +79,7 @@ class Pipeline:
             Each element represents one word of the document.
 
         """
-        return self.__pipeline(str(doc))
+        return self.__pipeline(doc)
 
     @staticmethod
     def __name(thing: object) -> str:

@@ -141,7 +141,7 @@ class Visualize:
         axes = (figure.add_subplot(n_rows, 2, topic+1)
                 for topic in self.__topic_range)
         zipped = zip(self.__topic_range, axes)
-        imgs = list(self.words_in_topic(topic, axis) for topic, axis in zipped)
+        imgs = [self.words_in_topic(topic, axis) for topic, axis in zipped]
         figure.tight_layout()
         return imgs
 

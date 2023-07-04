@@ -186,16 +186,16 @@ class PlsaResult:
 
     @staticmethod
     def __non_empty_string(doc: str) -> str:
-        doc = str(doc)
-        if not doc:
+        if doc := doc:
+            return doc
+        else:
             raise ValueError('Cannot assign topics to an empty string!')
-        return doc
 
     def __safely_processed(self, doc: str) -> Tuple[str, ...]:
-        processed = self.__corpus.pipeline.process(doc)
-        if not processed:
+        if processed := self.__corpus.pipeline.process(doc):
+            return processed
+        else:
             raise ValueError('No words left in document after preprocesing!')
-        return processed
 
     @staticmethod
     def __evaluated(encoded: ndarray) -> (ndarray, int):
